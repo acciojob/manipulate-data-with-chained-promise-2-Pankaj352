@@ -4,24 +4,24 @@ function processArray() {
   new Promise((resolve) => {
     setTimeout(() => {
       resolve([1, 2, 3, 4]);
-    }, 1000); // Initial 1-second delay (matches Cypress wait)
+    }, 3000); // Fix: 3-second initial delay as per requirements
   })
     .then((arr) => {
       return new Promise((resolve) => {
+        const evenNumbers = arr.filter((num) => num % 2 === 0);
         setTimeout(() => {
-          const evenNumbers = arr.filter((num) => num % 2 === 0);
           outputDiv.innerText = evenNumbers.join(", "); // Update output
           resolve(evenNumbers);
-        }, 1000); // 1-second delay (matches Cypress wait)
+        }, 1000); // 1-second delay for filtering step
       });
     })
     .then((evenNumbers) => {
       return new Promise((resolve) => {
+        const multipliedNumbers = evenNumbers.map((num) => num * 2);
         setTimeout(() => {
-          const multipliedNumbers = evenNumbers.map((num) => num * 2);
           outputDiv.innerText = multipliedNumbers.join(", "); // Update output
           resolve(multipliedNumbers);
-        }, 2000); // 2-second delay (matches Cypress wait)
+        }, 2000); // 2-second delay for multiplication step
       });
     })
     .catch((error) => {
